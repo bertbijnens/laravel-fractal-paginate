@@ -1,0 +1,33 @@
+{
+    "name": "bertbijnens/laravel-fractal-paginate",
+    "description": "Extending Spatie's laravel fractal package to support build-in pagination",
+    "type": "laravel",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bert Bijnens"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "spatie/laravel-fractal": "^5.5"
+    },
+    "autoload": {
+        "files": [
+            "src/Helpers/helpers.php"
+        ],
+        "psr-4": {
+            "BertBijnens\\LaravelFractalPaginate\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "BertBijnens\\LaravelFractalPaginate\\LaravelFractalPaginateServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    }
+}
