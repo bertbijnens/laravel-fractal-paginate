@@ -22,6 +22,7 @@ class PaginationContext
 
 	public $max_limit = 100;
 
+	public $query = null;
 
 	protected $data = [];
 
@@ -90,6 +91,8 @@ class PaginationContext
 		}
 
         $this->applyPageFilters($query);
+
+        $this->query = $query;
 
 		return $query;
 	}
@@ -242,5 +245,29 @@ class PaginationContext
 		return [
 			'next' => $next_page ? "https://" . $_SERVER['HTTP_HOST'] . $uri . $next_page : null
 		];
+	}
+
+	public function getMetaData($data) {
+	    $meta = [
+	        'total' => 0,
+            'pages' => 0,
+            'page' => 0
+        ];
+
+	    $query = with(clone $this->query);
+	    if($query) {
+	        $query->limit = null;
+            $meta['total'] = $query->offset(0)->count();
+        }
+
+	    if($this->paginationRequired || $this->limit) {
+            $meta['pages'] = ceil($meta['total'] / $this->limit);
+        }
+
+	    if($this->paginationAvailable) {
+            $meta['page'] = $this->page;
+        }
+
+		return $meta;
 	}
 }

@@ -12,7 +12,7 @@ use League\Fractal\Serializer\ArraySerializer;
 
 class PaginationSerializer extends ArraySerializer
 {
-	public static $context = [];
+	public static $context = null;
 
 	public function collection($resourceKey, array $data) {
 
@@ -23,6 +23,7 @@ class PaginationSerializer extends ArraySerializer
 		return [
 			'data' => $data,
 			'links' => optional(self::$context)->getPaginationData($data) ?: [],
+			'meta' => optional(self::$context)->getMetaData($data) ?: [],
 		];
 	}
 
