@@ -28,12 +28,12 @@ class PaginationContext
 
 
 	protected $fillable = [
-	    'page',
-        'since',
-        'until',
-        'offset',
-        'limit'
-    ];
+		'page',
+		'since',
+		'until',
+		'offset',
+		'limit'
+	];
 
 
 	public function __construct($context = array(), $paginationRequired = true) {
@@ -59,8 +59,8 @@ class PaginationContext
 		}
 
 		if($this->page || $this->limit || $this->since || $this->offset) {
-		    $this->paginationAvailable = true;
-        }
+			$this->paginationAvailable = true;
+		}
 	}
 
 	public static function make($context, $paginationRequired = true) {
@@ -69,9 +69,9 @@ class PaginationContext
 
 
 	public function getPageType() {
-	    if($this->page === null && $this->offset !== null) {
-            return 'offset';
-        }
+		if($this->page === null && $this->offset !== null) {
+			return 'offset';
+		}
 
 		return 'page';
 	}
@@ -90,9 +90,9 @@ class PaginationContext
 			$this->applyTimestampFilters($query);
 		}
 
-        $this->applyPageFilters($query);
+		$this->applyPageFilters($query);
 
-        $this->query = $query;
+		$this->query = $query;
 
 		return $query;
 	}
@@ -146,9 +146,9 @@ class PaginationContext
 		}
 
 		return '?' . http_build_query(array_merge(
-			$_GET,
-			$context
-		));
+				$_GET,
+				$context
+			));
 	}
 
 	public function getPrevious() {
@@ -196,9 +196,9 @@ class PaginationContext
 		}
 
 		return '?' . http_build_query(array_merge(
-			$_GET,
-			$context
-		));
+				$_GET,
+				$context
+			));
 	}
 
 	private function applyPageFilters($query) {
@@ -241,32 +241,34 @@ class PaginationContext
 		}
 
 		$next_page = $this->getNextPage();
+		$previous_page = $this->getPrevious();
 
 		return [
-			'next' => $next_page ? "https://" . $_SERVER['HTTP_HOST'] . $uri . $next_page : null
+			'next' => $next_page ? "https://" . $_SERVER['HTTP_HOST'] . $uri . $next_page : null,
+			'previous' => $previous_page ? "https://" . $_SERVER['HTTP_HOST'] . $uri . $previous_page : null
 		];
 	}
 
 	public function getMetaData($data) {
-	    $meta = [
-	        'total' => 0,
-            'pages' => 0,
-            'page' => 0
-        ];
+		$meta = [
+			'total' => 0,
+			'pages' => 0,
+			'page' => 0
+		];
 
-	    $query = with(clone $this->query);
-	    if($query) {
-	        $query->limit = null;
-            $meta['total'] = $query->offset(0)->count();
-        }
+		$query = with(clone $this->query);
+		if($query) {
+			$query->limit = null;
+			$meta['total'] = $query->offset(0)->count();
+		}
 
-	    if($this->paginationRequired || $this->limit) {
-            $meta['pages'] = ceil($meta['total'] / $this->limit);
-        }
+		if($this->paginationRequired || $this->limit) {
+			$meta['pages'] = ceil($meta['total'] / $this->limit);
+		}
 
-	    if($this->paginationAvailable) {
-            $meta['page'] = $this->page;
-        }
+		if($this->paginationAvailable) {
+			$meta['page'] = $this->page;
+		}
 
 		return $meta;
 	}
