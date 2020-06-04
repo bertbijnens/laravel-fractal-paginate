@@ -233,7 +233,7 @@ class PaginationContext
 	}
 
 	public function getPaginationData($data) {
-		$uri = $_SERVER['REQUEST_URI'];
+		$uri = $_SERVER['REQUEST_URI'] ?? env('APP_URL');
 		$this->data = $data;
 
 		if(strpos($uri, '?') !== false) {
