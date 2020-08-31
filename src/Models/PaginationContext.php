@@ -258,10 +258,12 @@ class PaginationContext
 			'page' => 0
 		];
 
-		$query = with(clone $this->query);
-		if($query) {
-			$query->limit = null;
-			$meta['total'] = $query->offset(0)->count();
+		if($this->query) {
+			$query = with(clone $this->query);
+			if($query) {
+				$query->limit = null;
+				$meta['total'] = $query->offset(0)->count();
+			}
 		}
 
 		if($this->paginationRequired || $this->limit) {
