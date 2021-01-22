@@ -243,7 +243,7 @@ class PaginationContext
 		$next_page = $this->getNextPage();
 		$previous_page = $this->getPrevious();
 
-		$protocol = isset($_SERVER["HTTPS"]) ? 'https' : 'http';
+		$protocol = env('APP_ENV') == 'local' && !isset($_SERVER["HTTPS"]) ? 'http' : 'https';
 
 		return [
 			'next' => $next_page ? $protocol . '://' . $_SERVER['HTTP_HOST'] . $uri . $next_page : null,
