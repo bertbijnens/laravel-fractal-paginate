@@ -20,7 +20,7 @@ class PaginationContext
 
 	public $limit = null;
 
-	public $max_limit = 100;
+	public $max_limit = 1000;
 
 	public $query = null;
 
@@ -233,7 +233,7 @@ class PaginationContext
 	}
 
 	public function getPaginationData($data) {
-		$uri = $_SERVER['REQUEST_URI'] ?? env('APP_URL');
+		$uri = $_SERVER['REQUEST_URI'] ?? request()->path();
 		$this->data = $data;
 
 		if(strpos($uri, '?') !== false) {
@@ -244,10 +244,11 @@ class PaginationContext
 		$previous_page = $this->getPrevious();
 
 		$protocol = env('APP_ENV') == 'local' && !isset($_SERVER["HTTPS"]) ? 'http' : 'https';
+		$host = $_SERVER['HTTP_HOST'] ?? env('APP_URL');
 
 		return [
-			'next' => $next_page ? $protocol . '://' . $_SERVER['HTTP_HOST'] . $uri . $next_page : null,
-			'previous' => $previous_page ? $protocol . '://' . $_SERVER['HTTP_HOST'] . $uri . $previous_page : null
+			'next' => $next_page ? $protocol . '://' . $host . $uri . $next_page : null,
+			'previous' => $previous_page ? $protocol . '://' . $host . $uri . $previous_page : null
 		];
 	}
 
