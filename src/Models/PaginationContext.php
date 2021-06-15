@@ -246,6 +246,9 @@ class PaginationContext
 		$protocol = env('APP_ENV') == 'local' && !isset($_SERVER["HTTPS"]) ? 'http' : 'https';
 		$host = $_SERVER['HTTP_HOST'] ?? env('APP_URL');
 
+		$host = str_replace('https://', '', $host);
+		$host = str_replace('http://', '', $host);
+
 		return [
 			'next' => $next_page ? $protocol . '://' . $host . $uri . $next_page : null,
 			'previous' => $previous_page ? $protocol . '://' . $host . $uri . $previous_page : null
