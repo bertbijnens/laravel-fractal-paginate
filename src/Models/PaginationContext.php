@@ -105,7 +105,7 @@ class PaginationContext
 		$context = [];
 
 		if($this->limit) {
-			$context['limit'] = $this->limit;
+			$context['limit'] = min($this->limit, $this->max_limit);
 		}
 
 		//TOOD check if there is a next page? else give current page / correct offset? unless items in current page is equeal to limit?
@@ -155,7 +155,7 @@ class PaginationContext
 		$context = [];
 
 		if($this->limit) {
-			$context['limit'] = $this->limit;
+			$context['limit'] = min($this->limit, $this->max_limit);
 		}
 
 		//TOOD check if there is a previous page? else give current page / correct offset? unless items in current page is equeal to limit?
