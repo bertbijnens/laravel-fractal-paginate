@@ -266,16 +266,16 @@ class PaginationContext
 			$query = with(clone $this->query);
 			if($query) {
 				$query->limit = null;
-				$meta['total'] = $query->offset(0)->count();
+				$meta['total'] = intval($query->offset(0)->count());
 			}
 		}
 
 		if($this->paginationRequired || $this->limit) {
-			$meta['pages'] = ceil($meta['total'] / $this->limit);
+			$meta['pages'] = intval(ceil($meta['total'] / $this->limit));
 		}
 
 		if($this->paginationAvailable) {
-			$meta['page'] = $this->page;
+			$meta['page'] = intval($this->page);
 		}
 
 		return $meta;
