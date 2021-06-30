@@ -154,8 +154,10 @@ class PaginationContext
 	public function getPrevious() {
 		$context = [];
 
+		$limit = min($this->limit, $this->max_limit);
+
 		if($this->limit) {
-			$context['limit'] = min($this->limit, $this->max_limit);
+			$context['limit'] = $limit;
 		}
 
 		//TOOD check if there is a previous page? else give current page / correct offset? unless items in current page is equeal to limit?
@@ -171,7 +173,7 @@ class PaginationContext
 			}
 		}
 		else {
-			$context['offset'] = ($this->offset ?: 0) + $this->limit; //TODO instead of limit, items in the current response
+			$context['offset'] = ($this->offset ?: 0) + $limit; //TODO instead of limit, items in the current response
 		}
 
 		if($this->since) {
