@@ -125,21 +125,8 @@ class PaginationContext
 		}
 
 		if($this->since) {
-			$s = $this->since;
-
-			//TODO figure out if this is should work:
-			/*foreach($data as $d) {
-				if(optional($d)['updated_at'] > $s) {
-					$s = $d['updated_at'];
-				}
-			}*/
-
-			//Temp workarround
-			$s = $_SERVER['REQUEST_TIME'];
-
-			$context['since'] = $s;
+			$context['since'] = $this->since;
 		}
-
 
 		if($this->until) {
 			$context['until'] = $this->until;
