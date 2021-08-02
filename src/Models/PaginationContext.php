@@ -133,7 +133,7 @@ class PaginationContext
 		}
 
 		return '?' . http_build_query(array_merge(
-				request()->all(),
+				request()->query(),
 				$context
 			));
 	}
