@@ -29,7 +29,7 @@ class PaginationSerializer extends ArraySerializer
 		];
 	}
 
-	public function null()
+	public function null(): ?array
 	{
 		return null;
 	}
