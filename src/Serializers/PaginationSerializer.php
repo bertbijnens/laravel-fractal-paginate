@@ -15,7 +15,7 @@ class PaginationSerializer extends ArraySerializer
 {
 	public static $context = null;
 
-	public function collection(?string $resourceKey, array $data)
+	public function collection(?string $resourceKey, array $data): array
 	{
 
 		if ($resourceKey !== 'root') {
