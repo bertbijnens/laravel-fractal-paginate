@@ -10,7 +10,8 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "spatie/laravel-fractal": "^5.5"
+        "php": "^8.0",
+        "spatie/laravel-fractal": "^6.0"
     },
     "autoload": {
         "files": [
@@ -25,9 +26,7 @@
             "providers": [
                 "BertBijnens\\LaravelFractalPaginate\\LaravelFractalPaginateServiceProvider"
             ],
-            "aliases": {
-
-            }
+            "aliases": {}
         }
     }
 }

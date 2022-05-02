@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: bertbijnens
@@ -14,11 +15,12 @@ class PaginationSerializer extends ArraySerializer
 {
 	public static $context = null;
 
-	public function collection($resourceKey, array $data) {
+	public function collection(?string $resourceKey, array $data): array
+	{
 
-	    if($resourceKey !== 'root') {
-            return $data;
-        }
+		if ($resourceKey !== 'root') {
+			return $data;
+		}
 
 		return [
 			'data' => $data,
@@ -27,11 +29,13 @@ class PaginationSerializer extends ArraySerializer
 		];
 	}
 
-	public function null() {
+	public function null(): ?array
+	{
 		return null;
 	}
 
-	public static function setContext($context) {
+	public static function setContext($context)
+	{
 		self::$context = $context ?: [];
 	}
 }
