@@ -10,7 +10,8 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "spatie/laravel-fractal": "^6.0.2"
+        "php": "^8.0",
+        "spatie/laravel-fractal": "^6.0"
     },
     "autoload": {
         "files": [
