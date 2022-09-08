@@ -11,8 +11,8 @@
     "minimum-stability": "dev",
     "require": {
         "php": "^8.0",
-        "laravel/framework": "^9.0",
-        "spatie/laravel-fractal": "^6.0"
+        "laravel/framework": "^8.0|^9.0",
+        "spatie/laravel-fractal": "^5.x|^6.0"
     },
     "autoload": {
         "files": [
