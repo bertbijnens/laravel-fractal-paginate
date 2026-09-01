@@ -211,13 +211,27 @@ class PaginationContext
 		}
 	}
 
+	private function parseDate($value): string {
+		if(is_numeric($value)) {
+			return date('Y-m-d H:i:s', (int)$value);
+		}
+
+		$timestamp = strtotime($value);
+
+		if($timestamp === false) {
+			throw new Exception('Invalid date value: ' . $value);
+		}
+
+		return date('Y-m-d H:i:s', $timestamp);
+	}
+
 	private function applyTimestampFilters($query) {
 		if($this->since) {
-			$query->where('updated_at', '>=', date('Y-m-d H:i:s', $this->since));
+			$query->where('updated_at', '>=', $this->parseDate($this->since));
 		}
 
 		if($this->until) {
-			$query->where('updated_at', '<', date('Y-m-d H:i:s', $this->until));
+			$query->where('updated_at', '<', $this->parseDate($this->until));
 		}
 	}
 
